@@ -1,0 +1,44 @@
+<form action="" #register="ngForm" (ngSubmit)="handleRegister(register)">
+    <div class="row">
+        <div class="col-6">
+            <input type="text" placeholder="enter your name" class="form-control" required [(ngModel)]="model.name" name="name" #name="ngModel" minlength="4">
+            <div class="alert alert-danger" *ngIf="register.submitted && name.invalid">
+                <div *ngIf="name.errors?.['required']">
+                    Name Is Required
+                </div>
+                <div *ngIf="name.errors?.['minlength']">
+                    Name Is minlength 4
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <input type="email" placeholder="enter your email" class="form-control" required email [(ngModel)]="model.email" name="email" #email="ngModel">
+            <div class="alert alert-danger" *ngIf="email.invalid && register.submitted">
+                <div *ngIf="email.errors?.['required']">
+                        Email Is Required
+                </div>
+                <div *ngIf="email.errors?.['email']">
+                    please enter invaled email
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <input  type="password" placeholder="enter your password" class="form-control" required [(ngModel)]="model.password" name="password" #password="ngModel" pattern="(^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$)">
+            <div class="alert alert-danger" *ngIf="password.invalid &&register.submitted">
+                <div *ngIf="password.errors?.['required']">
+                    password Is Required 
+                 </div>
+                <div *ngIf="password.errors?.['pattern']">
+                    Minimum eight characters, at least one letter, one number and one special character
+                 </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="col-4">
+            <br>
+            <button class="btn btn-primary">Register</button>       
+        </div>
+    </div>
+</form>

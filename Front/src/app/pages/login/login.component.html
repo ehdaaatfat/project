@@ -1,0 +1,29 @@
+<form action="" [formGroup]="loginForm" (ngSubmit)="handleSubmit()">
+    <div class="alert alert-danger" *ngIf="errorMsg">
+        {{errorMsg}}
+    </div>
+
+    <div class="row gy-4 my-4">
+        <div class="col-6">
+            <input type="email" placeholder="enter your email" (input)="errorMsg=null" class="form-control"  formControlName="email">
+            
+        </div>
+        <div class="col-6">
+            <input  type="password" placeholder="enter your password"(input)="errorMsg=null" class="form-control"  formControlName="password">
+            <div class="alert alert-danger" *ngIf="loginData.password.invalid &&isSubmitted">
+                <div *ngIf="password?.errors?.['required']">
+                    password Is Required 
+                 </div>
+                <div *ngIf="loginData.password?.errors?.['minlength']">
+                    Minimum eight characters, at least one letter, one number and one special character
+                 </div>
+                
+            </div>
+        </div>
+        
+        <div class="col-4">
+            <br>
+            <button class="btn btn-primary">Log In</button>       
+        </div>
+    </div>
+</form>
